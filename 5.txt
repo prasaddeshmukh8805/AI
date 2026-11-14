@@ -1,0 +1,43 @@
+
+from collections import deque
+
+grid = [
+    ['S', '.', '.', '.'],
+    ['#', '#', '.', '#'],
+    ['.', '.', '.', '.'],
+    ['.', '#', '#', 'G']
+]
+
+rows = len(grid)
+cols = len(grid[0])
+
+start = (0, 0)
+goal = (3, 3)
+
+queue = deque([[start]])
+visited = [start]
+
+while queue:
+    path = queue.popleft()
+    x, y = path[-1]
+
+    if (x, y) == goal:
+        print("Path Found:")
+        print(path)
+        break
+
+    moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+    for dx, dy in moves:
+        nx = x + dx
+        ny = y + dy
+
+        if (0 <= nx < rows and 0 <= ny < cols
+                and grid[nx][ny] != '#'
+                and (nx, ny) not in visited):
+
+            visited.append((nx, ny))
+            queue.append(path + [(nx, ny)])
+
+else:
+    print("No Path Found")
