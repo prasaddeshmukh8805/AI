@@ -1,0 +1,21 @@
+rules = {
+    "hello": "Hello! How can I help you?",
+    "hi": "Hi! Nice to meet you.",
+    "how are you": "I am fine.",
+    "bye": "Goodbye!"
+}
+
+print("Chatbot: Hello! How can I help you?")
+
+while True:
+    user = input("You: ").lower().strip()
+
+    if user in ["bye", "exit", "quit"]:
+        print("Chatbot: Goodbye! Have a nice day.")
+        break
+
+    elif user in rules:
+        print("Chatbot:", rules[user])
+
+    else:
+        print("Chatbot: Sorry, I don't understand.")
