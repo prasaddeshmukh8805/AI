@@ -1,0 +1,44 @@
+
+grid = [
+    ['S', '.', '.', '.'],
+    ['.', '#', '#', '.'],
+    ['.', '.', '.', '.'],
+    ['#', '#', '.', 'G']
+]
+
+rows = len(grid)
+cols = len(grid[0])
+
+position = [0, 0]
+visited = set()
+
+while grid[position[0]][position[1]] != 'G':
+    r, c = position
+    visited.add((r, c))
+
+    print("Current Position:", position)
+
+    moves = [
+        (r, c + 1),
+        (r + 1, c),
+        (r, c - 1),
+        (r - 1, c)
+    ]
+
+    moved = False
+
+    for nr, nc in moves:
+        if (0 <= nr < rows and 0 <= nc < cols
+                and grid[nr][nc] != '#'
+                and (nr, nc) not in visited):
+            position = [nr, nc]
+            moved = True
+            break
+
+    if not moved:
+        print("Goal cannot be reached")
+        break
+
+if grid[position[0]][position[1]] == 'G':
+    print("Goal Reached!")
+    print("Final Position:", position)
