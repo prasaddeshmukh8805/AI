@@ -1,0 +1,33 @@
+
+visited = set()
+
+def water_jug_dfs(a, b, jug1, jug2, target):
+
+    if (a, b) in visited:
+        return False
+
+    print(f"Visited state: ({a}, {b})")
+    visited.add((a, b))
+
+    if a == target or b == target:
+        print("Solution Found:", (a, b))
+        return True
+
+    return (
+        water_jug_dfs(jug1, b, jug1, jug2, target) or
+        water_jug_dfs(a, jug2, jug1, jug2, target) or
+        water_jug_dfs(0, b, jug1, jug2, target) or
+        water_jug_dfs(a, 0, jug1, jug2, target) or
+        water_jug_dfs(
+            a - min(a, jug2 - b),
+            b + min(a, jug2 - b),
+            jug1, jug2, target
+        ) or
+        water_jug_dfs(
+            a + min(b, jug1 - a),
+            b - min(b, jug1 - a),
+            jug1, jug2, target
+        )
+    )
+
+water_jug_dfs(0, 0, 4, 3, 2)
