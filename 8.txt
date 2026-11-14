@@ -1,0 +1,27 @@
+
+low = 1
+high = 100
+
+print("Think of a number between 1 and 100.")
+
+while low <= high:
+    guess = (low + high) // 2
+
+    print("I guess your number is:", guess)
+    feedback = input("Enter (higher/lower/correct): ").lower()
+
+    if feedback == "higher":
+        low = guess + 1
+
+    elif feedback == "lower":
+        high = guess - 1
+
+    elif feedback == "correct":
+        print("Your number is guessed successfully!")
+        break
+
+    else:
+        print("Invalid input. Enter higher, lower or correct.")
+
+else:
+    print("Your feedback is inconsistent. Please try again.")
