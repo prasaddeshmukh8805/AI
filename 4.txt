@@ -1,0 +1,43 @@
+
+import random
+
+distance = [
+    [0, 10, 15, 20, 25],
+    [10, 0, 35, 25, 30],
+    [15, 35, 0, 30, 20],
+    [20, 25, 30, 0, 15],
+    [25, 30, 20, 15, 0]
+]
+
+n = 5
+k = 3
+
+def cost(path):
+    total = 0
+    for i in range(n - 1):
+        total += distance[path[i]][path[i + 1]]
+    total += distance[path[-1]][path[0]]
+    return total
+
+beam = []
+
+for i in range(k):
+    path = [0] + random.sample(range(1, n), n - 1)
+    beam.append(path)
+
+for i in range(100):
+    new_paths = []
+
+    for path in beam:
+        for j in range(1, n - 1):
+            new_path = path.copy()
+            new_path[j], new_path[j + 1] = new_path[j + 1], new_path[j]
+            new_paths.append(new_path)
+
+    new_paths.sort(key=cost)
+    beam = new_paths[:k]
+
+best = beam[0]
+
+print("Best Path:", best + [best[0]])
+print("Minimum Distance:", cost(best))
